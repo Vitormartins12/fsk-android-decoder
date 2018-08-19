@@ -22,7 +22,7 @@ public class SoundReceiver {
     public void start() {
         Log.d("TAG","Start recording...");
         final int recBufferSize = 4 * AudioRecord.getMinBufferSize(Const.SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
-        Log.d("tag",Integer.toString(recBufferSize) + " " + Integer.toString(Const.SAMPLES));
+        //Log.d("tag",Integer.toString(recBufferSize) + " " + Integer.toString(Const.SAMPLES));
 
         assert (recBufferSize > Const.SAMPLES);
 
@@ -57,6 +57,7 @@ public class SoundReceiver {
 
     public void destroy() {
         stop();
+
         if (mAudioInput != null) {
             try {
                 mAudioInput.stop();
