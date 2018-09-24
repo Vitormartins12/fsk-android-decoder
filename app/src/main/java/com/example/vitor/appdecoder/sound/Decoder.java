@@ -4,6 +4,7 @@ package com.example.vitor.appdecoder.sound;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
 
 public class Decoder {
@@ -126,6 +127,7 @@ public class Decoder {
         Bundle bundle = new Bundle();
         bundle.putString("Text", s);
         msg.setData(bundle);
+        Log.d("TAG", toString().valueOf(msg));
         mHandler.sendMessage(msg);
 
     }

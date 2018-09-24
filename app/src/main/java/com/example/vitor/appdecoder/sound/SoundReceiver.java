@@ -2,11 +2,9 @@ package com.example.vitor.appdecoder.sound;
 
 import android.util.Log;
 import android.os.Handler;
-
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-
 
 public class SoundReceiver {
 
@@ -33,7 +31,6 @@ public class SoundReceiver {
                 AudioFormat.ENCODING_PCM_16BIT,
                 recBufferSize  // most likely 1600
         );
-
         mAudioReader = new AudioReaderThread(mAudioInput, mAnalyzer);
         mAudioReader.start();
         mAudioInput.startRecording();
@@ -76,7 +73,6 @@ public class SoundReceiver {
 class AudioReaderThread extends Thread {
     final AudioRecord mAudioInput;
     final Analyzer mAnalyzer;
-
 
     /**
      * @param audioInput <code>AudioRecord</code> needs to be configured and ready to go.
