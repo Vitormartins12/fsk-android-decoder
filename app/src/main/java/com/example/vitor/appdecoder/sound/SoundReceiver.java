@@ -5,6 +5,13 @@ import android.os.Handler;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
 
 public class SoundReceiver {
 
@@ -34,6 +41,10 @@ public class SoundReceiver {
         mAudioReader = new AudioReaderThread(mAudioInput, mAnalyzer);
         mAudioReader.start();
         mAudioInput.startRecording();
+
+
+
+
     }
 
     public void stop() {
