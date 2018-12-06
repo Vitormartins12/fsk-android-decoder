@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.method.ScrollingMovementMethod;
 import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import com.example.vitor.appdecoder.sound.SoundReceiver;
@@ -27,10 +28,11 @@ public class decodeAudio extends AppCompatActivity {
 
     private Button gravarButton;
     private Button stopButton;
-    private Button destroyButton;
+    private ImageButton destroyButton;
     private Button rqstButton;
     private TextView mTextView;
     private TextView mTextView2;
+    public TextView mTextView3;
     private SoundReceiver mReceiver;
     private APIConection mAPI;
 
@@ -45,12 +47,14 @@ public class decodeAudio extends AppCompatActivity {
                     String s = msg.getData().getString("Text");
                     mTextView.setText(s);
                     mAPI.logar(s);
+
+                    /*
                     try {
-                        //mAPI.logar(s);
+                        mAPI.logar(s);
                         //mProgressBar.setProgress(Integer.parseInt(s) / 10);
                     } catch (NumberFormatException e) {
                         // intentionally empty
-                    }
+                    }*/
                 }
             }
         }
@@ -65,19 +69,26 @@ public class decodeAudio extends AppCompatActivity {
 
         mTextView = (TextView) findViewById(R.id.tv);
         mTextView.setMovementMethod(new ScrollingMovementMethod());
-        //mTextView.setText("");
         mTextView2 = (TextView) findViewById(R.id.tv2);
-
+        mTextView3 = (TextView) findViewById(R.id.textView3);
         gravarButton = (Button) findViewById(R.id.recordButton);
         stopButton = (Button) findViewById(R.id.stopButton);
-        destroyButton = (Button) findViewById(R.id.destroyButton);
+        destroyButton = (ImageButton) findViewById(R.id.destroyButton);
         rqstButton = (Button) findViewById(R.id.rqstButton);
+        rqstButton.setEnabled(false);
+        stopButton.setEnabled(false);
+
+
+
 
 
         gravarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTextView3.setText("Medindo... Aguarde o valor na tela.");
                 mReceiver.start();
+                rqstButton.setEnabled(true);
+                stopButton.setEnabled(true);
                 //mReceiver.stop();
             }
         });
@@ -85,6 +96,8 @@ public class decodeAudio extends AppCompatActivity {
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTextView3.setText("Parado. Solicite análise ou volte a medir.");
+
                 mReceiver.stop();
             }
         });
@@ -99,7 +112,11 @@ public class decodeAudio extends AppCompatActivity {
         rqstButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                mTextView3.setText("Solicitando...");
                 try {
+                    //gravarButton.setVisibility(View.GONE);
+                    //stopButton.setVisibility(View.GONE);
+                    mTextView3.setText("Concluído");
                     JSONObject obj = mAPI.mandar();
                     mTextView2.setText(obj.getString("data"));
                 } catch (ExecutionException e) {
