@@ -2,11 +2,16 @@ package com.example.vitor.appdecoder.sound;
 
 import android.util.Log;
 import android.os.Handler;
-
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStreamWriter;
 
 public class SoundReceiver {
 
@@ -22,7 +27,7 @@ public class SoundReceiver {
     public void start() {
         Log.d("TAG","Start recording...");
         final int recBufferSize = 4 * AudioRecord.getMinBufferSize(Const.SAMPLE_RATE, AudioFormat.CHANNEL_IN_MONO, AudioFormat.ENCODING_PCM_16BIT);
-        Log.d("tag",Integer.toString(recBufferSize) + " " + Integer.toString(Const.SAMPLES));
+        //Log.d("tag",Integer.toString(recBufferSize) + " " + Integer.toString(Const.SAMPLES));
 
         assert (recBufferSize > Const.SAMPLES);
 
@@ -33,10 +38,13 @@ public class SoundReceiver {
                 AudioFormat.ENCODING_PCM_16BIT,
                 recBufferSize  // most likely 1600
         );
-
         mAudioReader = new AudioReaderThread(mAudioInput, mAnalyzer);
         mAudioReader.start();
         mAudioInput.startRecording();
+
+
+
+
     }
 
     public void stop() {
@@ -57,6 +65,7 @@ public class SoundReceiver {
 
     public void destroy() {
         stop();
+
         if (mAudioInput != null) {
             try {
                 mAudioInput.stop();
@@ -75,7 +84,6 @@ public class SoundReceiver {
 class AudioReaderThread extends Thread {
     final AudioRecord mAudioInput;
     final Analyzer mAnalyzer;
-
 
     /**
      * @param audioInput <code>AudioRecord</code> needs to be configured and ready to go.

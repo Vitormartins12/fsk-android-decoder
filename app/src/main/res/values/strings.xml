@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">AppDecoder</string>
+    <string name="app_name">Fuel App</string>
+    <string name="tv2">Text View</string>
+    <string name="username">Usuário</string>
+    <string name="password">Senha</string>
+    <string name="measure">Medir</string>
 </resources>
