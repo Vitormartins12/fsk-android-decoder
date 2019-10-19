@@ -55,6 +55,7 @@ public class APIConection{
                 printstream.print(myList+"\n");
                 fileinput.close();
 
+                // To Do: put as env var.
                 String myUrl = String.format("https://fuel-app-rna.herokuapp.com/rna/%d", lastelement);
                 String result;
                 HttpGetRequest getRequest = new HttpGetRequest();
