@@ -19,6 +19,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintStream;
 import java.nio.Buffer;
 
+
+// Class that connects to app API and makes http requests.
 public class APIConection{
 
     public ArrayList<Integer> myList = new ArrayList<Integer>();
@@ -53,7 +55,7 @@ public class APIConection{
                 printstream.print(myList+"\n");
                 fileinput.close();
 
-                String myUrl = String.format("https://fuel-app-rna.herokuapp.com/rna/%d",lastelement);
+                String myUrl = String.format("https://fuel-app-rna.herokuapp.com/rna/%d", lastelement);
                 String result;
                 HttpGetRequest getRequest = new HttpGetRequest();
                 result = getRequest.execute(myUrl).get();

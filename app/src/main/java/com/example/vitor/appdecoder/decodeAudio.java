@@ -78,10 +78,7 @@ public class decodeAudio extends AppCompatActivity {
         rqstButton.setEnabled(false);
         stopButton.setEnabled(false);
 
-
-
-
-
+        // Button that initializes value measurements.
         gravarButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -93,6 +90,7 @@ public class decodeAudio extends AppCompatActivity {
             }
         });
 
+        // Button that stops measurements.
         stopButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
